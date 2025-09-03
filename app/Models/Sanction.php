@@ -10,6 +10,7 @@ class Sanction extends Model
 
     protected $fillable = [
         'doctor_id',
+        'resignation_id',
         'incidence_id',
         'start_date',
         'end_date',
@@ -21,8 +22,13 @@ class Sanction extends Model
         return $this->belongsTo(Doctor::class);
     }
 
-    public function Incidence()
+    public function incidence()
     {
         return $this->belongsTo(Incidence::class);
+    }
+
+    public function resignation()
+    {
+        return $this->belongsTo(Resignation::class);
     }
 }

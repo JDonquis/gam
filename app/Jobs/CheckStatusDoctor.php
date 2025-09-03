@@ -30,6 +30,19 @@ class CheckStatusDoctor implements ShouldQueue
      */
     public function handle(): void
     {
+
+
+        $doctors = Doctor::where('status', DoctorStatusEnum::SANCTIONED->value)->get();
+
+        foreach ($doctors as $doctor) {
+            $sanction = Sanction::where('doctor_id', $doctor->id)->first();
+
+            if (!isset($sanction->id)) {
+                $doctor->update(['status' => DoctorStatusEnum::WITH_INCIDENCE->value]);
+            }
+        }
+
+
         $doctors = Doctor::where('status', DoctorStatusEnum::WITH_INCIDENCE->value)->get();
 
         foreach ($doctors as $doctor) {
@@ -45,18 +58,6 @@ class CheckStatusDoctor implements ShouldQueue
                     : DoctorStatusEnum::IN_COURSE->value;
 
                 $doctor->update(['status' => $newStatus]);
-            }
-        }
-
-        $doctors = Doctor::where('status', DoctorStatusEnum::SANCTIONED->value)->get();
-
-        foreach ($doctors as $doctor) {
-            $sanction = Sanction::where('doctor_id', $doctor->id)->first();
-
-            Log::info('esta entrando aca');
-
-            if (!isset($sanction->id)) {
-                $doctor->update(['status' => DoctorStatusEnum::WITH_INCIDENCE->value]);
             }
         }
     }

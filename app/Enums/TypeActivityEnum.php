@@ -32,6 +32,10 @@ enum TypeActivityEnum: int
     case UPDATE_SANCTION = 16;
     case DELETE_SANCTION = 17;
 
+    case GENERATE_RESIGNATION = 18;
+    case UPDATE_RESIGNATION = 19;
+    case DELETE_RESIGNATION = 20;
+
 
 
 
@@ -61,6 +65,10 @@ enum TypeActivityEnum: int
             self::GENERATE_SANCTION => 'Generar sancion',
             self::UPDATE_SANCTION => 'Editar sancion',
             self::DELETE_SANCTION => 'Eliminar sancion',
+
+            self::GENERATE_RESIGNATION => 'Generar renuncia',
+            self::UPDATE_RESIGNATION => 'Editar renuncia',
+            self::DELETE_RESIGNATION => 'Eliminar renuncia',
         };
     }
 }

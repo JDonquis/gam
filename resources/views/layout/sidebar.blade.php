@@ -132,6 +132,20 @@
                 Sanciones
             </span>
         </a>
+
+        <a x-data="{ linkHover: false, linkActive: false }" @mouseover="linkHover = true" @mouseleave="linkHover = false"
+            href="{{ route('resignations.index') }}"
+            class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200"
+                :class="linkHover || linkActive ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            <span class="ml-3 transition duration-200" :class="linkHover ? 'text-gray-100' : ''">
+                Renuncias
+            </span>
+        </a>
         <!-- end::Menu link -->
 
 

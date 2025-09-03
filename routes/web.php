@@ -9,6 +9,7 @@ use App\Http\Controllers\CensusController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\IncidenceController;
 use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\ResignationController;
 use App\Http\Controllers\SanctionController;
 
 Route::middleware('guest')->group(function () {
@@ -114,11 +115,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::get('/incidencias', [IncidenceController::class, 'index'])->name('incidences.index');
     Route::get('/incidencias/ver/{incidence}', [IncidenceController::class, 'show'])->name('incidences.show');
-    Route::get('/incidencias/crear', [IncidenceController::class, 'create'])->name('incidences.create');
     Route::put('/incidencias/ver/{incidence}/editar', [IncidenceController::class, 'update'])->name('incidences.update');
     Route::delete('/incidencias/ver/{incidence}', [IncidenceController::class, 'destroy'])->name('incidences.destroy');
     Route::get('/incidencias/todos', [IncidenceController::class, 'destroyAll'])->name('incidences.destroy.all');
-    Route::post('/incidencias/crear', [IncidenceController::class, 'store'])->name('incidences.store');
 
     // ----------------------------            ---------------------------------------
     // ---------------------------- SANCTIONS ---------------------------------------
@@ -128,4 +127,13 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/sanciones/ver/{sanction}/editar', [SanctionController::class, 'edit'])->name('sanctions.edit');
     Route::put('/sanciones/ver/{sanction}/editar', [SanctionController::class, 'update'])->name('sanctions.update');
     Route::delete('/sanciones/ver/{incidence}', [SanctionController::class, 'destroy'])->name('sanctions.destroy');
+
+    // ----------------------------            ---------------------------------------
+    // ---------------------------- RESIGNATIONS ---------------------------------------
+    // ----------------------------            ---------------------------------------
+    Route::get('/renuncias', [ResignationController::class, 'index'])->name('resignations.index');
+    Route::post('/renuncias/crear', [ResignationController::class, 'store'])->name('resignations.store');
+    Route::get('/renuncias/ver/{resignation}/editar', [ResignationController::class, 'edit'])->name('resignations.edit');
+    Route::put('/renuncias/ver/{resignation}/editar', [ResignationController::class, 'update'])->name('resignations.update');
+    Route::delete('/renuncias/ver/{resignation}', [ResignationController::class, 'destroy'])->name('resignations.destroy');
 });

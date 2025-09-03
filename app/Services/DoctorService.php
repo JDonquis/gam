@@ -15,6 +15,7 @@ use App\Enums\TypeActivityEnum;
 use App\Events\ActivityCreated;
 use App\Jobs\CheckStatusDoctor;
 use App\Models\DoctorIncidence;
+use App\Models\Resignation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -142,6 +143,8 @@ class DoctorService
                 Sanction::where('doctor_id', $doctor->id)->delete();
                 DoctorIncidence::where('doctor_id', $doctor->id)->delete();
                 Incidence::where('doctor_id', $doctor->id)->delete();
+                Resignation::where('doctor_id', $doctor->id)->delete();
+
                 $doctor->delete();
 
 
@@ -160,6 +163,4 @@ class DoctorService
             throw $e;
         }
     }
-
-    public function generateSanction($doctor) {}
 }

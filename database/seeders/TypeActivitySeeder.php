@@ -36,8 +36,9 @@ class TypeActivitySeeder extends Seeder
             ['name' => 'Editar sanción'],
             ['name' => 'Eliminar sanción'],
 
-
-
+            ['name' => 'Generar renuncia'],
+            ['name' => 'Editar renuncia'],
+            ['name' => 'Eliminar renuncia'],
 
 
         ];

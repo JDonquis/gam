@@ -38,6 +38,21 @@
                 </div>
 
                 <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                    <form method="POST" action="{{ route('resignations.store') }}" x-data="{ confirmResignation() { return confirm('¿Estás seguro de generar una renuncia a este medico?.') } }"
+                        @submit.prevent="if(confirmResignation()) { $el.submit() }">
+                        @csrf
+                        <input type="hidden" name="doctor_id" value="{{ $doctor->id }}">
+                        <button type="submit"
+                            class="flex items-center bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                            <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                            <span>Generar renuncia</span>
+                        </button>
+                    </form>
+
                     <a href="{{ route('doctors.edit', ['doctor' => $doctor->id]) }}"
                         class="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                         <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"

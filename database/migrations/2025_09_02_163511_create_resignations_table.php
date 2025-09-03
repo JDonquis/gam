@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sanctions', function (Blueprint $table) {
+        Schema::create('resignations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('doctor_id');
-            $table->foreignId('incidence_id');
-            $table->date('start_date');
-            $table->date('end_date');
             $table->string('reason')->nullable();
+            $table->string('resignation_letter')->nullable();
+            $table->string('document')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sanctions');
+        Schema::dropIfExists('resignations');
     }
 };

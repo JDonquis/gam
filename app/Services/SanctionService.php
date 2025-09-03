@@ -21,7 +21,7 @@ class SanctionService
     public function getSanctions()
     {
         $sanctions = Sanction::query()
-            ->with('doctor', 'incidence')
+            ->with('doctor', 'incidence', 'resignation')
             ->orderBy('id', 'desc')
             ->paginate(10);
 
