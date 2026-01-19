@@ -8,6 +8,8 @@ use App\Models\Activity;
 use App\Models\Census;
 use App\Models\Doctor;
 use App\Models\Incidence;
+use App\Models\Resignation;
+use App\Models\Sanction;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
@@ -30,6 +32,8 @@ class AppController extends Controller
         $doctorsWithSanction = Doctor::where('status', DoctorStatusEnum::SANCTIONED->value)->count();
         $censusesCount = Census::count();
         $incidencesCount = Incidence::count();
+        $resignationsCount = Resignation::count();
+        $sanctionsCount = Sanction::count();
 
         return view('dashboard.index')->with(compact(
             'activities',
@@ -40,6 +44,8 @@ class AppController extends Controller
             'doctorsWithSanction',
             'censusesCount',
             'incidencesCount',
+            'resignationsCount',
+            'sanctionsCount'
         ));
     }
 }
