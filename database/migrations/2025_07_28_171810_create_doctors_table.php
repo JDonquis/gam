@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
             $table->string('ci')->unique();
+            $table->string('fullname');
+            $table->string('email')->nullable();
+            $table->string('specialty');
+            $table->string('hospital_center');
             $table->json('data');
             $table->string('status');
             $table->boolean('is_foreign')->default(false);

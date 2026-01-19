@@ -10,6 +10,10 @@ class Doctor extends Model
     protected $fillable = [
         'data',
         'ci',
+        'fullname',
+        'email',
+        'specialty',
+        'hospital_center',
         'status',
         'is_foreign',
     ];
@@ -20,6 +24,9 @@ class Doctor extends Model
 
     public $fieldsRequired = [
         'ci',
+        'fullname',
+        'specialty',
+        'hospital_center',
         'start_date',
         'end_date',
     ];
