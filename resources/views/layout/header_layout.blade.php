@@ -169,7 +169,7 @@
                 <!-- start::Main link -->
                 <div class="cursor-pointer">
                     <img src="{{ auth()->user()->photo ? asset('storage/' . auth()->user()->photo) : asset('assets/img/default.png') }}"
-                        class="w-8 rounded-full">
+                        class="w-8 rounded-full" style="height: 32px; object-fit:cover;">
                 </div>
                 <!-- end::Main link -->
 

@@ -194,12 +194,12 @@
                     </div>
                     <div
                         class="bg-blue-300 bg-opacity-20 text-blue-700 flex flex-col items-center justify-center rounded-lg">
-                        <span class="text-3xl font-bold">24</span>
+                        <span class="text-3xl font-bold">{{ $resignationsCount }}</span>
                         <span>Renuncias</span>
                     </div>
                     <div
                         class="bg-red-300 bg-opacity-20 text-red-700 flex flex-col items-center justify-center rounded-lg">
-                        <span class="text-3xl font-bold">37</span>
+                        <span class="text-3xl font-bold">{{ $sanctionsCount }}</span>
                         <span>Sanciones</span>
                     </div>
                 </div>
