@@ -25,8 +25,8 @@
                         <form method="GET" action="{{ url()->current() }}" class="flex items-center">
                             <div class="relative flex-grow">
                                 <input type="search" name="search" id="search"
-                                    class="w-full py-2 pl-10 pr-4 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                                    placeholder="Buscar por cédula o cualquier dato..." value="{{ request('search') }}">
+                                    class="w-50 py-2 pl-10 pr-4 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    placeholder="Buscar..." value="{{ request('search') }}">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -34,11 +34,12 @@
                                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
                                 </div>
+                                <button type="submit"
+                                    class=" bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark">
+                                    Buscar
+                                </button>
                             </div>
-                            <button type="submit"
-                                class="ml-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark">
-                                Buscar
-                            </button>
+
                         </form>
                     </div>
 
@@ -92,7 +93,13 @@
                             <tr>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase w-16">ID</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase w-32">Cédula</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Datos</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase w-32">Apellidos y
+                                    Nombre</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase w-32">
+                                    Especialidad</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase w-32">
+                                    Centro</th>
+
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase w-28">Acciones
                                 </th>
                             </tr>
@@ -100,6 +107,7 @@
                         <tbody class="divide-y divide-gray-200">
                             @forelse ($doctors as $doctor)
                                 <tr class="{{ $loop->odd ? 'bg-gray-50' : 'bg-white' }} hover:bg-gray-100">
+
                                     <td class="px-4 py-3 text-sm text-gray-500">{{ $doctor->id }}</td>
 
                                     <td class="px-4 py-3 text-sm text-gray-500 truncate">
@@ -118,91 +126,24 @@
                                         </div>
                                     </td>
 
-                                    <td class="px-4 py-3 text-sm text-gray-600">
-                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                            @php
-                                                $data = $doctor->data ?? [];
-                                                $excludedFields = ['ci', 'start_date', 'end_date'];
-                                                $filteredData = $data;
-
-                                                // Dividir los datos en dos grupos
-                                                $totalFields = count($filteredData);
-                                                $third = ceil($totalFields / 3);
-                                                $firstPart = array_slice($filteredData, 0, $third, true);
-                                                $secondPart = array_slice($filteredData, $third, null, true);
-                                                $thirdPart = array_slice($filteredData, $third, null, true);
-
-                                                $firstCount = 0;
-                                                $secondCount = 0;
-                                                $thirdCount = 0;
-
-                                            @endphp
-
-                                            <!-- Primera columna de datos -->
-                                            <div class="space-y-2">
-                                                @foreach ($firstPart as $key => $value)
-                                                    @if ($firstCount < 3)
-                                                        <div class="truncate">
-                                                            <span class="font-medium text-xs text-gray-500 uppercase">
-                                                                {{ ucfirst(str_replace('_', ' ', $key)) }}:
-                                                            </span>
-                                                            <span class="text-gray-800 block truncate"
-                                                                title="{{ $value }}">
-                                                                {{ $value }}
-                                                            </span>
-                                                        </div>
-                                                        @php
-                                                            $firstCount += 1;
-                                                        @endphp
-                                                    @endif
-                                                @endforeach
-                                            </div>
-
-                                            <!-- Segunda columna de datos -->
-                                            <div class="space-y-2">
-                                                @foreach ($secondPart as $key => $value)
-                                                    @if ($secondCount < 3)
-                                                        <div class="truncate">
-                                                            <span class="font-medium text-xs text-gray-500 uppercase">
-                                                                {{ ucfirst(str_replace('_', ' ', $key)) }}:
-                                                            </span>
-                                                            <span class="text-gray-800 block truncate"
-                                                                title="{{ $value }}">
-                                                                {{ $value }}
-                                                            </span>
-                                                        </div>
-                                                        @php
-                                                            $secondCount += 1;
-                                                        @endphp
-                                                    @endif
-                                                @endforeach
-                                            </div>
-
-                                            <!-- Tercera columna de datos -->
-                                            <div class="space-y-2">
-                                                @foreach ($thirdPart as $key => $value)
-                                                    @if ($thirdCount < 3)
-                                                        <div class="truncate">
-                                                            <span class="font-medium text-xs text-gray-500 uppercase">
-                                                                {{ ucfirst(str_replace('_', ' ', $key)) }}:
-                                                            </span>
-                                                            <span class="text-gray-800 block truncate"
-                                                                title="{{ $value }}">
-                                                                {{ $value }}
-                                                            </span>
-                                                        </div>
-                                                        @php
-                                                            $thirdCount += 1;
-                                                        @endphp
-                                                    @endif
-                                                @endforeach
-                                            </div>
+                                    <td class="px-4 py-3 text-sm text-gray-500 truncate">
+                                        <div class="flex items-center">
+                                            {{ $doctor->fullname }}
                                         </div>
-
-                                        @if (count($filteredData) === 0)
-                                            <div class="text-gray-400 italic">Sin datos adicionales</div>
-                                        @endif
                                     </td>
+
+                                    <td class="px-4 py-3 text-sm text-gray-500 truncate">
+                                        <div class="flex items-center">
+                                            {{ $doctor->specialty }}
+                                        </div>
+                                    </td>
+
+                                    <td class="px-4 py-3 text-sm text-gray-500 truncate">
+                                        <div class="flex items-center">
+                                            {{ $doctor->hospital_center }}
+                                        </div>
+                                    </td>
+
 
                                     <td class="px-4 py-3 text-sm font-medium">
                                         <div class="flex space-x-[0px]">
@@ -247,7 +188,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="px-4 py-4 text-center text-sm text-gray-500">
+                                    <td colspan="6" class="px-4 py-4 text-center text-sm text-gray-500">
                                         No se encontraron médicos registrados
                                     </td>
                                 </tr>
